@@ -15,3 +15,9 @@
 - やったこと：app/agent.pyのINSTRUCTIONSのうち、「- 回答の最後に、関係する回（第N回）を示す。」という記載を削除した上で、「AIE2026の講座の宿題にある「3レベル」とは何ですか？」と尋ねた。
 - 結果：元々のINSTRUCTIONSでは「第1回」と表示されていたものが、削除後は表示されなくなった。
 - 気づき・疑問：この場合は、INSTRUCTIONSへの記載有無により、しっかりと異なる結果が観察できた。一方で、「- 用語や講座に固有のことを答える前に、必ず search_glossary で用語集を確認する。」または「- 用語集に見つからないことは、推測で断定せず「用語集にはない」と伝える。」を削除した場合は、変更前後で出力は変化しなかった。この点は疑問であったが、これは、INSTRUCTIONSでの記載有無に関わらず、ツールが実行可能であることをモデルが認識していること、及びtool.pyのdocstringに別途指示があるためと推察する。
+『--trace付きで実行し、ツールの呼ばれ方や回答がどう変わるか』については、
+変更前が
+[usage] RunUsage(cost=Decimal('0.0005515'), details={'text_prompt_tokens': 955}, input_text_tokens=955, input_tokens=955, output_tokens=106, requests=2, tool_calls=1)
+変更後が
+[usage] RunUsage(cost=Decimal('0.0006788'), details={'text_prompt_tokens': 921}, input_text_tokens=921, input_tokens=921, output_tokens=161, requests=2, tool_calls=1)
+と、ほぼ変化が無かったが、これについては「第●回」の表示有無だけの違いであるため、変化がほぼ無いことは妥当であると考えられた。
